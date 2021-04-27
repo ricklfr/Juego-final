@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Node2D.gd" type="Script" id=1]
+[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mariocasas.jpg" type="Texture" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1023.65, -0.46106, 0, 0, 0, 0, -2.10196, -0.235748, 0, 0, 0, 0, 2.13589, -131.609, 0, 0, 0, 0, 1027.7, -137.966, 0, 0, 0, 0, 1023.46, -4.47357, 0, 0, 0, 0, 1023.65, -0.46106 )
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 1023.65, -0.46106 )
+rotation = 3.14137
+scale = Vector2( 1.04653, 1.04216 )
+
+[node name="mariocasas" type="Sprite" parent="."]
+position = Vector2( 500.254, 295.458 )
+scale = Vector2( 4.25, 4.37962 )
+texture = ExtResource( 3 )
+
+[node name="meteotime" type="Timer" parent="."]
+wait_time = 0.191
+autostart = true
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+[connection signal="timeout" from="meteotime" to="." method="_on_meteotime_timeout"]
